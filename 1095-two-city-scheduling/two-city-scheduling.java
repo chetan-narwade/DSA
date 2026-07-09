@@ -1,23 +1,20 @@
+import java.util.Arrays;
+
 class Solution {
     public int twoCitySchedCost(int[][] costs) {
-        int n = costs.length;
-        int[][] diff = new int[n][2];
-
+        Arrays.sort(costs, (a, b) -> (a[1] - a[0]) - (b[1] - b[0]));
+        
+        int totalCost = 0;
+        int n = costs.length / 2;
+        
         for (int i = 0; i < n; i++) {
-            diff[i][0] = costs[i][0] - costs[i][1]; 
-            diff[i][1] = i;                        
+            totalCost += costs[i][1]; 
         }
-
-        Arrays.sort(diff, (a, b) -> a[0] - b[0]);
-
-        int cost = 0;
-        for (int i = 0; i < n / 2; i++) {
-            cost += costs[diff[i][1]][0]; 
+        
+        for (int i = n; i < costs.length; i++) {
+            totalCost += costs[i][0];
         }
-        for (int i = n / 2; i < n; i++) {
-            cost += costs[diff[i][1]][1]; 
-        }
-
-        return cost;
+        
+        return totalCost;
     }
 }
