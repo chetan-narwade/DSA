@@ -1,31 +1,16 @@
 class Solution {
-    int odd = Integer.MAX_VALUE;
+    public boolean uniformArray(int[] nums1) {
+        int minimum = Integer.MAX_VALUE;
+        boolean even = true;
 
-    public boolean uniformArray(int[] nums) {
+        for (int num : nums1) {
+            minimum = Math.min(minimum, num);
 
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] % 2 == 1) {
-                odd = Math.min(odd, nums[i]);
+            if (num % 2 == 1) {
+                even = false;
             }
         }
 
-        return solve(nums, false) || solve(nums, true);
-    }
-
-    public boolean solve(int nums[], boolean isOdd) {
-
-        for (int i = 0; i < nums.length; i++) {
-            if (isOdd) {
-                if (nums[i] % 2 == 0 && odd >= nums[i]) {
-                    return false;
-                }
-            } else {
-                if (nums[i] % 2 == 1 && odd >= nums[i]) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
+        return even || minimum % 2 == 1;
     }
 }
