@@ -1,0 +1,13 @@
+class Solution {
+    public int sortPermutation(int[] nums) {
+        int res = Integer.MAX_VALUE;
+
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]==i) continue;
+
+            res  = res&nums[i];
+        }
+
+        return res==Integer.MAX_VALUE ? 0 : res;
+    }
+}
